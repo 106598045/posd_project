@@ -37,5 +37,5 @@ bool Sort::compByDecreasingArea(const Shape * num1,const Shape * num2) {
 }
 
 bool Sort::compByIncreasingCompactness(const Shape * num1,const Shape * num2) {
-    return (num1->perimeter()/num1->area()) > (num2->perimeter()/num2->area());
+    return (num1->area()/num1->perimeter()) > (num2->area()/num2->perimeter());
 }

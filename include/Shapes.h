@@ -52,7 +52,8 @@ private:
 public:
 
     Rectangle(double ulcx, double ulcy, double length, double width, std::string name = "r"):
-        Shape(name), x(ulcx), y(ulcy), l(length), w(width){}
+        Shape(name), x(ulcx), y(ulcy), l(length), w(width){
+        }
 
     double area() const {return l*w;}
 

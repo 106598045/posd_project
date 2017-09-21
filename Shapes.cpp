@@ -1,4 +1,3 @@
-
 #include "include/Shapes.h"
 
 double sumOfArea(const std::vector<Shape *> & shapes) {
@@ -25,7 +24,7 @@ double sumOfPerimeter(const std::vector<Shape *> & shapes){
 
 Shape* theLargestArea(const std::vector<Shape *> & shapes){
 
-    Shape *largestShape = nullptr;
+    Shape *largestShape = 0;
     double largestArea = 0;
 
     for (Shape *shapePoint: shapes)
@@ -77,4 +76,3 @@ void sortByDecreasingPerimeter(std::vector<Shape *> & shapes) {
         left = shift;
     }
 }
-

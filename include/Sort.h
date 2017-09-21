@@ -1,41 +1,27 @@
-#include <list>
+#ifndef SORT_H_INCLUDED
+#define SORT_H_INCLUDED
+
 #include "Shapes.h"
+#include <list>
+#include <stdio.h>
+#include <algorithm>
 
-bool sortIncreasingPerimeter(Shape * c,Shape *r){
-    return c->perimeter() < r->perimeter();
-}
-bool sortDecreasingPerimeter(Shape * c,Shape *r){
-    return c->perimeter() > r->perimeter();
-}
-bool sortIncreasingArea(Shape * c,Shape *r){
-    return c->perimeter() < r->perimeter();
-}
-bool sortDecreasingArea(Shape * c,Shape *r){
-    return c->perimeter() > r->perimeter();
-}
-bool sortIncreasingCompactness(Shape * c,Shape *r){
-    return (c->area()/c->perimeter()) > (r->area()/r->perimeter());
-}
 class Sort {
-
-  public :static void sortByIncreasingPerimeter(std::list<Shape *> * shapeList){
-      shapeList->sort(sortIncreasingPerimeter);
-  }
-
-  public :static void sortByDecreasingPerimeter(std::list<Shape *> * shapeList){
-      shapeList->sort(sortDecreasingPerimeter);
-  }
-
-  public :static void sortByIncreasingArea(std::list<Shape *> * shapeList){
-      shapeList->sort(sortIncreasingArea);
-  }
-
-  public :static void sortByDecreasingArea(std::list<Shape *> * shapeList){
-      shapeList->sort(sortDecreasingArea);
-  }
-
-  public :static void sortByIncreasingCompactness(std::list<Shape *> * shapeList){
-      shapeList->sort(sortIncreasingCompactness);
-  }
-
+public:
+    static void sortByIncreasingPerimeter(std::list<Shape *> * shapeList);
+    static void sortByDecreasingPerimeter(std::list<Shape *> * shapeList);
+    static void sortByIncreasingArea(std::list<Shape *> * shapeList);
+    static void sortByDecreasingArea(std::list<Shape *> * shapeList);
+    static void sortByIncreasingCompactness(std::list<Shape *> * shapeList);
+    //static bool comp(const Shape * num1,const Shape * num2);
+    static bool compByIncreasingPerimeter(const Shape * num1,const Shape * num2);
+    static bool compByDecreasingPerimeter(const Shape * num1,const Shape * num2);
+    static bool compByIncreasingArea(const Shape * num1,const Shape * num2);
+    static bool compByDecreasingArea(const Shape * num1,const Shape * num2);
+    static bool compByIncreasingCompactness(const Shape * num1,const Shape * num2);
 };
+
+
+
+
+#endif

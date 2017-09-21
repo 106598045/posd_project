@@ -21,21 +21,21 @@ void Sort::sortByIncreasingCompactness(std::list<Shape *> * shapeList){
 }
 
 bool Sort::compByIncreasingPerimeter(const Shape * num1,const Shape * num2) {
-    return num1->perimeter() > num2->perimeter();
-}
-
-bool Sort::compByDecreasingPerimeter(const Shape * num1,const Shape * num2) {
     return num1->perimeter() < num2->perimeter();
 }
 
-bool Sort::compByIncreasingArea(const Shape * num1,const Shape * num2) {
-    return num1->area() > num2->area();
+bool Sort::compByDecreasingPerimeter(const Shape * num1,const Shape * num2) {
+    return num1->perimeter() > num2->perimeter();
 }
 
-bool Sort::compByDecreasingArea(const Shape * num1,const Shape * num2) {
+bool Sort::compByIncreasingArea(const Shape * num1,const Shape * num2) {
     return num1->area() < num2->area();
 }
 
+bool Sort::compByDecreasingArea(const Shape * num1,const Shape * num2) {
+    return num1->area() > num2->area();
+}
+
 bool Sort::compByIncreasingCompactness(const Shape * num1,const Shape * num2) {
-    return (num1->area()/num1->perimeter()) > (num2->area()/num2->perimeter());
+    return (num1->area()/num1->perimeter()) < (num2->area()/num2->perimeter());
 }

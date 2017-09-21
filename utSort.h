@@ -36,9 +36,9 @@ TEST (Sort, sortByIncreasingPerimeter) {
     Sort::sortByIncreasingPerimeter(shapes);
     it = shapes->begin();
 
-    ASSERT_NEAR(62.83, (*it++)->perimeter(),0.01);
-    ASSERT_NEAR(21.05, (*it++)->perimeter(),0.01);
     ASSERT_NEAR(14, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(21.05, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(62.83, (*it++)->perimeter(),0.01);
 }
 
 TEST (Sort, sortByDecreasingPerimeter) {
@@ -68,9 +68,9 @@ TEST (Sort, sortByDecreasingPerimeter) {
     Sort::sortByDecreasingPerimeter(shapes);
     it = shapes->begin();
 
-    ASSERT_NEAR(14, (*it++)->perimeter(),0.01);
-    ASSERT_NEAR(21.05, (*it++)->perimeter(),0.01);
     ASSERT_NEAR(62.83, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(21.05, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(14, (*it++)->perimeter(),0.01);
 
 }
 
@@ -101,9 +101,9 @@ TEST (Sort, sortByIncreasingArea) {
     Sort::sortByIncreasingArea(shapes);
     it = shapes->begin();
 
-    ASSERT_NEAR(78.53, (*it++)->area(),0.01);
-    ASSERT_NEAR(18, (*it++)->area(),0.01);
     ASSERT_NEAR(12, (*it++)->area(),0.01);
+    ASSERT_NEAR(18, (*it++)->area(),0.01);
+    ASSERT_NEAR(78.53, (*it++)->area(),0.01);
 
 }
 
@@ -134,9 +134,9 @@ TEST (Sort, sortByDecreasingArea) {
     Sort::sortByDecreasingArea(shapes);
     it = shapes->begin();
 
-    ASSERT_NEAR(12, (*it++)->area(),0.01);
-    ASSERT_NEAR(18, (*it++)->area(),0.01);
     ASSERT_NEAR(78.53, (*it++)->area(),0.01);
+    ASSERT_NEAR(18, (*it++)->area(),0.01);
+    ASSERT_NEAR(12, (*it++)->area(),0.01);
 
 }
 
@@ -167,9 +167,9 @@ TEST (Sort, sortByIncreasingCompactness) {
     Sort::sortByIncreasingCompactness(shapes);
     it = shapes->begin();
 
-    ASSERT_NEAR(62.83, (*it++)->perimeter(),0.01);
-    ASSERT_NEAR(14, (*it++)->perimeter(),0.01);
     ASSERT_NEAR(21.05, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(14, (*it++)->perimeter(),0.01);
+    ASSERT_NEAR(62.83, (*it++)->perimeter(),0.01);
 
 }
 

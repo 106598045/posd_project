@@ -1,4 +1,4 @@
-#include "../../Desktop/GTest-master/include/Media.h"
+#include "include/Media.h"
 #include <iostream>
 
 /**< ShapeMedia */

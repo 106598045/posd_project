@@ -1,4 +1,4 @@
-#include "../../Desktop/GTest-master/include/Sort.h"
+#include "include/Sort.h"
 using namespace std;
 #include <list>
 #include <algorithm>

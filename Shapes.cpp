@@ -1,5 +1,4 @@
-
-#include "../../Desktop/GTest-master/include/Shapes.h"
+#include "include/Shapes.h"
 
 double sumOfArea(const std::vector<Shape *> & shapes) {
 

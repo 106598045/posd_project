@@ -20,7 +20,7 @@ Everyone's CI job had updated, so it should pull the repository once you push co
 
 #### Marks
 
-Each test is 6 points(2 for your test, 4 for we prepared), total is 90 points.
+Each test is 6 points(2 for your test, 4 for we prepared), total is 90 points
 
 #### Deadline
 

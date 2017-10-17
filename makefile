@@ -3,7 +3,6 @@
 
 all: hw3
 
-#未完成測試
 hw3: main.o variable.o number.o atom.o struct.o
 ifeq (${OS}, Windows_NT)
 	g++ -o hw3 main.o variable.o number.o atom.o struct.o -lgtest

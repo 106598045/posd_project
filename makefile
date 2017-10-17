@@ -12,7 +12,7 @@ endif
 #-------------------------------------------------
 
 main.o: main.cpp utStruct.h utAtom.h atom.h struct.h
-	 	g++ -std=c++11 -c main.cpp
+	 	g++ -std=gnu++0x -c main.cpp
 
 variable.o:variable.cpp number.h atom.h variable.h
 		g++ -std=gnu++0x -c variable.cpp

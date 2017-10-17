@@ -1,4 +1,4 @@
-#include "../include/number.h"
+#include "number.h"
 
 #include <string>
 using namespace std;

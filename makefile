@@ -1,5 +1,5 @@
 #INC_DIR = include
-SRC_DIR = src
+#SRC_DIR = src
 
 all: hw3
 
@@ -15,17 +15,17 @@ endif
 main.o: main.cpp utStruct.h utAtom.h atom.h struct.h
 	 	g++ -std=c++11 -c main.cpp
 
-variable.o:$(SRC_DIR)/variable.cpp number.h atom.h variable.h
-		g++ -std=gnu++0x -c $(SRC_DIR)/variable.cpp
+variable.o:variable.cpp number.h atom.h variable.h
+		g++ -std=gnu++0x -c variable.cpp
 #-------------------------------------------------
-number.o:variable.h number.h $(SRC_DIR)/number.cpp atom.h
-		g++ -std=gnu++0x -c $(SRC_DIR)/number.cpp
+number.o:variable.h number.h number.cpp atom.h
+		g++ -std=gnu++0x -c number.cpp
 #-------------------------------------------------
-atom.o: atom.h number.h variable.h $(SRC_DIR)/atom.cpp
-		g++ -std=gnu++0x -c $(SRC_DIR)/atom.cpp
+atom.o: atom.h number.h variable.h atom.cpp
+		g++ -std=gnu++0x -c atom.cpp
 #-------------------------------------------------
-struct.o: struct.h atom.h $(SRC_DIR)/struct.cpp
-		g++ -std=gnu++0x -c $(SRC_DIR)/struct.cpp
+struct.o: struct.h atom.h struct.cpp
+		g++ -std=gnu++0x -c struct.cpp
 
 clean:
 ifeq (${OS}, Windows_NT)

@@ -1,4 +1,4 @@
-#include "../include/atom.h"
+#include "atom.h"
 
 bool Atom::match(Number num){
   return num.symbol() == _symbol;

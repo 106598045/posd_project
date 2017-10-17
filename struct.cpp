@@ -1,4 +1,4 @@
-#include "../include/struct.h"
+#include "struct.h"
 
 #include <string>
 using namespace std;

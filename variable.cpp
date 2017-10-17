@@ -1,4 +1,4 @@
-#include "../include/variable.h"
+#include "variable.h"
 #include <string>
 #include <iostream>
 using namespace std;

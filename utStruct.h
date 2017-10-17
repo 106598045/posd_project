@@ -143,7 +143,7 @@ TEST(Struct, nested_struct3){
   Struct outerStruct(Atom("s1"),v_outerStruct);
 
   ASSERT_EQ("s1(s2(X))",outerStruct.symbol());
-  ASSERT_EQ("s1(s2(3.14))",outerStruct.value());
+  ASSERT_EQ("s1(s2(3.140000))",outerStruct.value());
 }
 
 // Given there are Struct s1 contains Struct s2 and Variable X
@@ -164,6 +164,6 @@ TEST(Struct, nested_struct_and_multiVariable){
   Struct outerStruct(Atom("s1"),v_outerStruct);
 
   ASSERT_EQ("s1(s2(Y), X)",outerStruct.symbol());
-  ASSERT_EQ("s1(s2(kent_beck), kent_beck)",outerStruct.value());
+  ASSERT_EQ("s1(s2(Y), kent_beck)",outerStruct.value());
   // 10/16 還沒定義 var match var
 }

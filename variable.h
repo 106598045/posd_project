@@ -3,24 +3,30 @@
 
 #include <string>
 #include "atom.h"
+#include "term.h"
+#include "number.h"
+
 using std::string;
+class Number;
+class Atom;
 
-class Variable{
+class Variable : public Term{
 public:
-  Variable(string s):_symbol(s){}
-  string const _symbol;
-  string value(){ return _value; }
-  bool match( Atom atom ){
-    bool ret = _assignable;
-    if(_assignable){
-      _value = atom._symbol ;
-      _assignable = false;
-    }
-    return ret;
-  }
+  Variable(){}
+  Variable(string s):_symbol(s),_value(s){}
+  string symbol()const{ return _symbol;}
+  string value()const;
+  bool match(Atom atom);
+  bool match(Number num);
+  bool match(Variable & var);
+  bool isAssignable();
+  void setNonAssignable();
 
-private:
+  string _symbol;
   string _value;
+  string * _varPointer = &_container;
+private:
+  string _container = "";
   bool _assignable = true;
 };
 

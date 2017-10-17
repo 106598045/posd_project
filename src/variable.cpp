@@ -4,7 +4,12 @@
 using namespace std;
 
 //string Variable::symbol() const{ return _symbol; }
-string Variable::value() const{return _value;}
+string Variable::value() const{
+  if(_varPointer){
+    return *_varPointer;
+  }
+  return _value;
+}
 
 bool Variable::match(Atom atom){
   bool ret = _assignable;
@@ -30,20 +35,12 @@ bool Variable::match(Number num){
 
 bool Variable::match(Variable &var){
   bool ret = _assignable;
-  if(!hasPointer()){
-    _varPointer = &var;
-  }else{
-    ret = (_varPointer->value() == var.value());
-  }
+  _varPointer = &(var._value);
   return ret;
 }
 
 bool Variable::isAssignable(){
   return _assignable;
-}
-
-bool Variable::hasPointer() const{
-  return (_varPointer == NULL);
 }
 
 void Variable::setNonAssignable(){

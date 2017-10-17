@@ -1,7 +1,7 @@
 INC_DIR = include
 SRC_DIR = src
 
-all: hw
+all: hw3
 #--------------------test ------------------------
 
 # HomeWork2 test
@@ -13,8 +13,8 @@ all: hw
 #endif
 
 #未完成測試
-hw: main.o variable.o number.o atom.o struct.o
-	g++ -o hw main.o variable.o number.o atom.o struct.o -lgtest -lpthread
+hw3: main.o variable.o number.o atom.o struct.o
+	g++ -o hw3 main.o variable.o number.o atom.o struct.o -lgtest -lpthread
 #-------------------------------------------------
 
 main.o: main.cpp utStruct.h utAtom.h $(INC_DIR)/atom.h $(INC_DIR)/struct.h
@@ -38,6 +38,6 @@ struct.o: $(INC_DIR)/struct.h $(INC_DIR)/atom.h $(SRC_DIR)/struct.cpp
 		g++ -std=gnu++0x -c $(SRC_DIR)/struct.cpp
 
 clean:
-	rm -f *.o hw
+	rm -f *.o hw3
 stat:
 	wc *.h *.cpp

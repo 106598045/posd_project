@@ -5,7 +5,7 @@
 #include <string>
 
 using namespace std;
-class Atom;
+//class Atom;
 class Variable;
 
 class Number{

@@ -49,6 +49,16 @@ bool Variable::match(Variable &var){
   return ret;
 }
 
+bool Variable::match(Term &term){
+  bool ret = _assignable;
+  
+  return ret;
+}
+
+/*bool match(Struct &str){
+  return true;
+}*/
+
 bool Variable::isAssignable(){
   return _assignable;
 }

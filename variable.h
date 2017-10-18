@@ -2,6 +2,7 @@
 #define VARIABLE_H
 
 #include <string>
+
 #include "atom.h"
 #include "term.h"
 #include "number.h"
@@ -19,6 +20,7 @@ public:
   bool match(Atom atom);
   bool match(Number num);
   bool match(Variable & var);
+  bool match(Term &term);
   bool isAssignable();
   void setNonAssignable();
 

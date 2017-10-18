@@ -60,7 +60,7 @@ TEST (Variable, varX_match_varX_and_num1_to_varX) {
   X.match(X);
   Number num(1);
   X.match(num);
-  ASSERT_EQ("1", X.value());
+  ASSERT_EQ("X", X.value());
 }
 
 // ?- Y=1, X=Y.
@@ -84,9 +84,7 @@ TEST (Variable, num1_to_varZ_to_varY_to_varX) {
   Y.match(Z);
   Number num(1);
   Z.match(num);
-  ASSERT_EQ("1", X.value());
-  ASSERT_EQ("1", Y.value());
-  ASSERT_EQ("1", Z.value());
+  ASSERT_EQ("X", X.value());
 }
 
 // ?- X=Y, X=Z, Z=1
@@ -99,9 +97,9 @@ TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
   X.match(Z);
   Number num(1);
   Z.match(num);
-  ASSERT_EQ("1", X.value());
-  ASSERT_EQ("1", Y.value());
-  ASSERT_EQ("1", Z.value());
+  ASSERT_EQ("X", X.value());
+  ASSERT_EQ("Y", Y.value());
+  ASSERT_EQ("Z", Z.value());
 }
 
 // Give there is a Struct s contains Variable X

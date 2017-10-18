@@ -49,11 +49,13 @@ bool Variable::match(Term &term){
   Variable *pt = dynamic_cast<Variable *>(&term);
   if(pt){
     if( *(pt->_varPointer) != ""){
-
       _varPointer = pt->_varPointer;
+      setNonAssignable();
     }else{
       pt->_varPointer = _varPointer;
+      pt->setNonAssignable();
     }
+
   }else{
     if(_assignable){
       _value = term.symbol();

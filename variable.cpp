@@ -12,7 +12,7 @@ string Variable::value() const{
   return _value;
 }
 
-bool Variable::match(Atom atom){
+/*bool Variable::match(Atom atom){
   bool ret = _assignable;
   if(_assignable){
     _value = atom._symbol ;
@@ -41,17 +41,24 @@ bool Variable::match(Number num){
 bool Variable::match(Variable &var){
   bool ret = _assignable;
   var._varPointer = _varPointer;
-  /*if(var.symbol() != symbol()){
-    Variable *v = new Variable();
-    v = &var;
-    _varPointer = v;
-  }*/
   return ret;
-}
+}*/
 
 bool Variable::match(Term &term){
   bool ret = _assignable;
-  
+  Variable *pt = dynamic_cast<Variable *>(&term);
+  if(pt){
+    pt->_varPointer = _varPointer;
+  }else{
+    if(_assignable){
+      _value = term.symbol();
+      _container = term.symbol();
+      *_varPointer = term.symbol();
+      _assignable = false;
+    }else{
+      ret = (_value == term.symbol());
+    }
+  }
   return ret;
 }
 

@@ -39,7 +39,7 @@ TEST (Variable, varY_to_varX_and_num1_to_varX) {
   X.match(Y);
   Number num(1);
   X.match(num);
-  ASSERT_EQ("1", Y.value());
+  ASSERT_EQ("1", X.value());
 }
 
 // ?- X=Y, Y=1.

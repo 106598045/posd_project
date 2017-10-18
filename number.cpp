@@ -5,14 +5,14 @@ using namespace std;
 
 Number::Number(double d){
   _value =  d;
-  _symbol = to_string(d);
+  _symbol = toString(d);
 }
 
-string Number::value(){
-  return to_string(_value);
+string Number::value() const{
+  return toString(_value);
 }
 
-string Number::symbol(){
+string Number::symbol() const{
   return _symbol;
 }
 
@@ -26,6 +26,6 @@ bool Number::match(Variable &var){
     var.setNonAssignable();
     return true;
   }else{
-    return to_string(_value) == var.value();
+    return toString(_value) == var.value();
   }
 }

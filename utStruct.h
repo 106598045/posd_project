@@ -143,7 +143,7 @@ TEST(Struct, nested_struct3){
   Struct outerStruct(Atom("s1"),v_outerStruct);
 
   ASSERT_EQ("s1(s2(X))",outerStruct.symbol());
-  ASSERT_EQ("s1(s2(3.140000))",outerStruct.value());
+  ASSERT_EQ("s1(s2(3.14))",outerStruct.value());
 }
 
 // Given there are Struct s1 contains Struct s2 and Variable X

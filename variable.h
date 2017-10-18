@@ -23,7 +23,6 @@ public:
   bool match(Term &term);
   bool isAssignable();
   void setNonAssignable();
-
   string _symbol;
   string _value;
   string * _varPointer = &_container;

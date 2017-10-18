@@ -15,8 +15,6 @@ public:
   Number(double i);
   string value() const;
   string symbol() const;
-  /*bool match(Number n);
-  bool match(Variable &var);*/
   bool match(Term & term);
 
 private:

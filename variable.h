@@ -14,17 +14,14 @@ class Atom;
 class Variable : public Term{
 public:
   Variable(){}
-  Variable(string s):_symbol(s),_value(s){}
+  Variable(string s):_symbol(s){}
   string symbol()const{ return _symbol;}
   string value()const;
-  //bool match(Atom atom);
-  //bool match(Number num);
-  //bool match(Variable & var);
   bool match(Term &term);
   bool isAssignable();
   void setNonAssignable();
   string _symbol;
-  string _value;
+  string _value ="";
   string * _varPointer = &_container;
 private:
   string _container = "";

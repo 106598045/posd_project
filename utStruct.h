@@ -82,7 +82,6 @@ TEST(Struct, var_match_atom){
   Variable X("X");
   Atom tom("tom");
   X.match(tom);
-  EXPECT_EQ("tom",X.value());
   std::vector<Term *> v = {&X};
   Struct s(Atom("s"), v);
   ASSERT_EQ("s(X)",s.symbol());
@@ -156,14 +155,14 @@ TEST(Struct, nested_struct_and_multiVariable){
   Variable X("X");
   Variable Y("Y");
   Atom kent_beck("kent_beck");
-  X.match(kent_beck);
-
   std::vector<Term *> v_innerStruct = {&Y};
   Struct innerStruct(Atom("s2"),v_innerStruct);
   std::vector<Term *> v_outerStruct = {&innerStruct,&X};
   Struct outerStruct(Atom("s1"),v_outerStruct);
+  X.match(kent_beck);
+  Y.match(X);
 
   ASSERT_EQ("s1(s2(Y), X)",outerStruct.symbol());
-  ASSERT_EQ("s1(s2(Y), kent_beck)",outerStruct.value());
+  ASSERT_EQ("s1(s2(kent_beck), kent_beck)",outerStruct.value());
   // 10/16 還沒定義 var match var
 }

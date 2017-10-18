@@ -48,23 +48,24 @@ bool Variable::match(Term &term){
   bool ret = _assignable;
   Variable *pt = dynamic_cast<Variable *>(&term);
   if(pt){
-    pt->_varPointer = _varPointer;
+    if( *(pt->_varPointer) != ""){
+      //需解決Y -> X
+      _varPointer = pt->_varPointer;
+    }else{
+      pt->_varPointer = _varPointer;
+    }
   }else{
     if(_assignable){
       _value = term.symbol();
       _container = term.symbol();
       *_varPointer = term.symbol();
-      _assignable = false;
+      setNonAssignable();
     }else{
       ret = (_value == term.symbol());
     }
   }
   return ret;
 }
-
-/*bool match(Struct &str){
-  return true;
-}*/
 
 bool Variable::isAssignable(){
   return _assignable;

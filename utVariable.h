@@ -71,7 +71,7 @@ TEST (Variable, num1_to_varY_and_varX_match_varY) {
   Y.match(num);
   Variable X("X");
   Y.match(X);
-  ASSERT_EQ("1", X.value());
+  ASSERT_EQ("X", X.value());
 }
 
 // ?- X=Y, Y=Z, Z=1

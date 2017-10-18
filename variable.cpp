@@ -9,7 +9,7 @@ string Variable::value() const{
     return *_varPointer;
     //return _varPointer->value();
   }
-  return _value;
+  return _symbol;
 }
 
 /*bool Variable::match(Atom atom){
@@ -49,7 +49,7 @@ bool Variable::match(Term &term){
   Variable *pt = dynamic_cast<Variable *>(&term);
   if(pt){
     if( *(pt->_varPointer) != ""){
-      //需解決Y -> X
+
       _varPointer = pt->_varPointer;
     }else{
       pt->_varPointer = _varPointer;

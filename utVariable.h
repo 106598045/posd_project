@@ -149,6 +149,4 @@ TEST (Variable, Struct2) {
   ASSERT_EQ("1", Y.value());
   ASSERT_EQ("1", Z.value());
 }
-
-
 #endif

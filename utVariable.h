@@ -140,7 +140,7 @@ TEST (Variable, Struct2) {
   Atom teddy("teddy");
   std::vector<Term *> v={&X};
   Struct s(Atom("s"),v);
-  X.match(teddy);
+  teddy.match(X);
   Y.match(s);
   ASSERT_EQ("Y", Y.symbol());
   ASSERT_EQ("s(teddy)", Y.value());

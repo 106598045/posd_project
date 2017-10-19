@@ -13,12 +13,6 @@ public:
     return symbol() == term.symbol();
   }
   /**不加const會出現錯誤 原因為value是const**/
-  virtual string toString(double d) const{
-    ostringstream targetItem;
-    targetItem << d;
-    string s = targetItem.str();
-    return s;
-  }
 };
 
 #endif

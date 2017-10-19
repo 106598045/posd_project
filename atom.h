@@ -12,12 +12,8 @@ class Variable;
 class Number;
 class Atom : public Term{
 public:
-  Atom (string s):_symbol(s) {}
+  Atom (string s):_symbol(s){}
   string symbol() const;
-  //bool operator ==(Atom a) {return _symbol == a._symbol;}
-  /*bool match(Atom atom);
-  bool match(Number num);
-  bool match(Variable &var);*/
   bool match(Term & term);
   string _symbol;
 };

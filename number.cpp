@@ -3,18 +3,26 @@
 #include <string>
 using namespace std;
 
+string Number::value() const{
+  return toString(_value);
+}
+
 Number::Number(double d){
   _value =  d;
   _symbol = toString(d);
 }
 
-string Number::value() const{
-  return toString(_value);
-}
-
 string Number::symbol() const{
   return _symbol;
 }
+
+string Number::toString(double d) const{
+  ostringstream targetItem;
+  targetItem << d;
+  string s = targetItem.str();
+  return s;
+}
+
 bool Number::match(Term &term){
   bool ret = false;
   Variable *pt = dynamic_cast<Variable *>(&term);
@@ -31,16 +39,3 @@ bool Number::match(Term &term){
   }
   return ret;
 }
-/*bool Number::match(Number n){
-  return _value == n._value;
-}
-
-bool Number::match(Variable &var){
-  if(var.isAssignable()){
-    var.match(*this);
-    var.setNonAssignable();
-    return true;
-  }else{
-    return toString(_value) == var.value();
-  }
-}*/

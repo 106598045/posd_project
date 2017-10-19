@@ -11,7 +11,7 @@ else
 endif
 #-------------------------------------------------
 
-main.o: main.cpp utStruct.h utAtom.h atom.h struct.h
+main.o: main.cpp utStruct.h atom.h struct.h
 	 	g++  -std=gnu++0x -c  main.cpp
 
 variable.o:variable.cpp number.h atom.h variable.h

@@ -4,11 +4,9 @@
 #include <iostream>
 using namespace std;
 
-//string Variable::symbol() const{ return _symbol; }
 string Variable::value() const{
   if(*_varPointer != ""){
     return *_varPointer;
-    //return _varPointer->value();
   }
   if(_value == "W") return "1";
   return _value;
@@ -32,12 +30,12 @@ bool Variable::match(Term &term){
       _container = term.value();
   }else{
     if(_assignable){
-      _value = term.symbol();
-      _container = term.symbol();
-      *_varPointer = term.symbol();
+      _value = term.value();
+      _container = term.value();
+      *_varPointer = term.value();
       setNonAssignable();
     }else{
-      ret = (_value == term.symbol());
+      ret = (_value == term.value());
     }
   }
   return ret;

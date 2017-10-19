@@ -15,10 +15,11 @@ public:
   Number(double i);
   string value() const;
   string symbol() const;
+  string toString(double d) const;
   bool match(Term & term);
 
 private:
-  double _value =0;
+  double _value = 0;
   string _symbol = "";
 };
 #endif

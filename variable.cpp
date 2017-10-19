@@ -12,50 +12,17 @@ string Variable::value() const{
   return _symbol;
 }
 
-/*bool Variable::match(Atom atom){
-  bool ret = _assignable;
-  if(_assignable){
-    _value = atom._symbol ;
-    _container = atom._symbol;
-    *_varPointer = atom._symbol;
-    _assignable = false;
-  }else{
-    ret = (_value == atom.symbol());
-  }
-  return ret;
-}
-
-bool Variable::match(Number num){
-  bool ret = _assignable;
-  if(_assignable){
-    _value = num.value() ;
-    _container =  num.value() ;
-    *_varPointer = num.value();
-    _assignable = false;
-  }else{
-    ret = (_value == num.value());
-  }
-  return ret;
-}
-
-bool Variable::match(Variable &var){
-  bool ret = _assignable;
-  var._varPointer = _varPointer;
-  return ret;
-}*/
-
 bool Variable::match(Term &term){
   bool ret = _assignable;
   Variable *pt = dynamic_cast<Variable *>(&term);
   if(pt){
+    //可能是Atom、variable錯
     if( *(pt->_varPointer) != ""){
       _varPointer = pt->_varPointer;
       setNonAssignable();
     }else{
       pt->_varPointer = _varPointer;
-      pt->setNonAssignable();
     }
-
   }else{
     if(_assignable){
       _value = term.symbol();

@@ -14,7 +14,7 @@ class Atom;
 class Variable : public Term{
 public:
   Variable(){}
-  Variable(string s):_symbol(s){}
+  Variable(string s):_symbol(s),_value(s){}
   string symbol()const{ return _symbol;}
   string value()const;
   bool match(Term &term);

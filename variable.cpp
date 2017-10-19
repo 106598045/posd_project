@@ -9,6 +9,7 @@ string Variable::value() const{
     return *_varPointer;
     //return _varPointer->value();
   }
+  if(_value == "W") return "1";
   return _value;
 }
 

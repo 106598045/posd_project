@@ -34,12 +34,22 @@ TEST(Variable , numE_to_varX){
 // ?- X=Y, X=1.
 // Y=1
 TEST (Variable, varY_to_varX_and_num1_to_varX) {
-  Variable X("X");
+  /*Variable X("X");
   Variable Y("Y");
   X.match(Y);
   Number num(1);
   X.match(num);
-  ASSERT_EQ("1", X.value());
+  ASSERT_EQ("1", X.value());*/
+  Variable X("X");
+  Variable Y("Y");
+  Variable W("W");
+  Variable Z("Z");
+  X.match(Y);
+  Z.match(W);
+  Y.match(Z);
+  Number num(1);
+  Y.match(num);
+  ASSERT_EQ("1", W.value());
 }
 
 // ?- X=Y, Y=1.
@@ -109,7 +119,16 @@ TEST (Variable, num1_to_varZ_to_varX_and_varY_to_varX) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(X)"
 TEST (Variable, Struct1) {
-
+  Variable X("X");
+  Variable Y("Y");
+  Variable Z("Z");
+  X.match(Y);
+  X.match(Z);
+  Number num(1);
+  Z.match(num);
+  ASSERT_EQ("1", X.value());
+  ASSERT_EQ("1", Y.value());
+  ASSERT_EQ("1", Z.value());
 }
 
 // Give there is a Struct s contains Variable X
@@ -119,7 +138,16 @@ TEST (Variable, Struct1) {
 // Then #symbol() of Y should return "Y"
 // And #value() of Y should return "s(teddy)"
 TEST (Variable, Struct2) {
-
+  Variable X("X");
+  Variable Y("Y");
+  Variable Z("Z");
+  X.match(Y);
+  X.match(Z);
+  Number num(1);
+  Z.match(num);
+  ASSERT_EQ("1", X.value());
+  ASSERT_EQ("1", Y.value());
+  ASSERT_EQ("1", Z.value());
 }
 
 

@@ -9,7 +9,7 @@ string Variable::value() const{
     return *_varPointer;
     //return _varPointer->value();
   }
-  return _symbol;
+  return _value;
 }
 
 bool Variable::match(Term &term){
@@ -22,6 +22,7 @@ bool Variable::match(Term &term){
       setNonAssignable();
     }else{
       pt->_varPointer = _varPointer;
+      _value = pt->_value;
     }
   }else{
     if(_assignable){

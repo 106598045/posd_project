@@ -1,4 +1,5 @@
 #include "variable.h"
+#include "struct.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -16,6 +17,7 @@ string Variable::value() const{
 bool Variable::match(Term &term){
   bool ret = _assignable;
   Variable *pt = dynamic_cast<Variable *>(&term);
+  Struct *st = dynamic_cast<Struct *>(&term);
   if(pt){
     //可能是Atom、variable錯
     if( *(pt->_varPointer) != ""){
@@ -25,6 +27,9 @@ bool Variable::match(Term &term){
       pt->_varPointer = _varPointer;
       _value = pt->_value;
     }
+  }else if(st){
+      _value = term.value();
+      _container = term.value();
   }else{
     if(_assignable){
       _value = term.symbol();

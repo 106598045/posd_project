@@ -1,5 +1,5 @@
-#include "../include/term.h"
-#include "../include/variable.h"
+#include "term.h"
+#include "variable.h"
 
 bool Term::match(Term & a){
   if (typeid(a) ==  typeid(Variable))

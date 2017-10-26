@@ -1,4 +1,4 @@
-#include "../include/variable.h"
+#include "variable.h"
 
 string Variable::value() const {
   if (_inst)

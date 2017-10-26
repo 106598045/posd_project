@@ -1,4 +1,4 @@
-#include "../include/list.h"
+#include "list.h"
 
 string List::symbol() const{
   string ret ="[";

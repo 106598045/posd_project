@@ -1,4 +1,4 @@
-#include "../include/struct.h"
+#include "struct.h"
 
 Term * Struct::args(int index) {
   return _args[index];

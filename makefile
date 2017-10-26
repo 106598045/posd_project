@@ -12,14 +12,14 @@ else
 endif
 #-------------------------------------------------
 
-main.o: main.cpp utStruct.h ${INC_DIR}/atom.h ${INC_DIR}/struct.h
+main.o: main.cpp utStruct.h atom.h struct.h
 	 	g++  -std=gnu++0x -c  main.cpp
 
-variable.o: ${SRC_DIR}/variable.cpp ${INC_DIR}/number.h ${INC_DIR}/atom.h ${INC_DIR}/variable.h
-		g++ -std=gnu++0x -c ${SRC_DIR}/variable.cpp
+variable.o: variable.cpp number.h atom.h variable.h
+		g++ -std=gnu++0x -c variable.cpp
 #-------------------------------------------------
-term.o: ${INC_DIR}/term.h ${INC_DIR}/variable.h ${SRC_DIR}/term.cpp
-		g++ -std=gnu++0x -c ${SRC_DIR}/term.cpp
+term.o: term.h variable.h term.cpp
+		g++ -std=gnu++0x -c term.cpp
 #-------------------------------------------------
 #number.o:${INC_DIR}/variable.h ${INC_DIR}/number.h ${SRC_DIR}/number.cpp ${INC_DIR}/atom.h
 #		g++ -std=gnu++0x -c ${SRC_DIR}/number.cpp
@@ -27,11 +27,11 @@ term.o: ${INC_DIR}/term.h ${INC_DIR}/variable.h ${SRC_DIR}/term.cpp
 #atom.o: ${INC_DIR}/atom.h ${INC_DIR}/number.h ${INC_DIR}/variable.h ${SRC_DIR}/atom.cpp
 #		g++ -std=gnu++0x -c ${SRC_DIR}/atom.cpp
 #-------------------------------------------------
-struct.o: ${INC_DIR}/struct.h ${INC_DIR}/atom.h ${SRC_DIR}/struct.cpp
-		g++ -std=gnu++0x -c ${SRC_DIR}/struct.cpp
+struct.o: struct.h atom.h struct.cpp
+		g++ -std=gnu++0x -c struct.cpp
 #-------------------------------------------------
-list.o: ${INC_DIR}/list.h ${SRC_DIR}/list.cpp
-		g++ -std=gnu++0x -c ${SRC_DIR}/list.cpp
+list.o: list.h list.cpp
+		g++ -std=gnu++0x -c list.cpp
 
 clean:
 ifeq (${OS}, Windows_NT)

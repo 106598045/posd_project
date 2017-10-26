@@ -1,4 +1,6 @@
 #include "list.h"
+#include "variable.h"
+#include <typeinfo>
 
 string List::symbol() const{
   string ret ="[";
@@ -41,7 +43,9 @@ List * List::tail() const{
 
 bool List::match(Term & term){
   bool ret = false;
-  if(_elements.size() != 0){
+  if(typeid(term) == typeid(Variable)){
+    ret = term.match(*this);
+  }else if(_elements.size() != 0){
     List *pt = dynamic_cast<List *>(&term);
     if(pt){
       ret = ComparisonList(pt);

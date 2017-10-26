@@ -93,8 +93,7 @@ TEST(List, matchToVarShouldSucceed) {
   Atom t("terence_tao");
   vector<Term *> args = {&num ,&X, &t};
   List L(args);
-  Y.match(L);
-  EXPECT_EQ("[496, X, terence_tao]",Y.value());
+  EXPECT_TRUE(L.match(Y));
 }
 
 // ?- X = [496, X, terence_tao].

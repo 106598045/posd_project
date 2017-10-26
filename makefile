@@ -2,13 +2,13 @@ INC_DIR = include
 SRC_DIR = src
 BIN_DIR = bin
 
-all: hw3
+all: hw4
 
-hw3: main.o term.o variable.o struct.o list.o
+hw4: main.o term.o variable.o struct.o list.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw3 main.o term.o variable.o struct.o list.o -lgtest
+	g++ -o hw4 main.o term.o variable.o struct.o list.o -lgtest
 else
-	g++ -o hw3 main.o term.o variable.o struct.o list.o -lgtest -lpthread
+	g++ -o hw4 main.o term.o variable.o struct.o list.o -lgtest -lpthread
 endif
 #-------------------------------------------------
 
@@ -37,5 +37,5 @@ clean:
 ifeq (${OS}, Windows_NT)
 		del *.o *.exe
 else
-		rm -f *.o hw3
+		rm -f *.o hw4
 endif

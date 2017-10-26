@@ -1,7 +1,4 @@
-#include "struct.h"
-
-#include <string>
-using namespace std;
+#include "../include/struct.h"
 
 Term * Struct::args(int index) {
   return _args[index];
@@ -27,20 +24,4 @@ string Struct::value() const{
   }
   ret += _args[_args.size()-1]-> value() + ")";
   return  ret;
-}
-
-bool Struct::match(Term &term){
-  Struct * ps = dynamic_cast<Struct *>(&term);
-  if (ps){
-    if (!_name.match(ps->_name))
-      return false;
-    if(_args.size()!= ps->_args.size())
-      return false;
-    for(int i=0;i<_args.size();i++){
-      if(_args[i]->symbol() != ps->_args[i]->symbol())
-          return false;
-    }
-    return true;
-  }
-  return false;
 }

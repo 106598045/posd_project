@@ -1,6 +1,6 @@
 #include <vector>
-#include "atom.h"
-#include "struct.h"
+#include "include/atom.h"
+#include "include/struct.h"
 
 TEST(Struct, hobby){
   Atom tom("tom");

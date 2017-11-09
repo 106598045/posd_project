@@ -1,11 +1,6 @@
 #include <gtest/gtest.h>
-//#include "utAtom.h"
-//#include "utStruct.h"
-//#include "utVariable.h"
-#include "utList.h"
-#include <iostream>
+#include "utParser.h"
 
-using namespace std;
 int main( int argc , char **argv )
 {
     testing :: InitGoogleTest( &argc , argv ) ;

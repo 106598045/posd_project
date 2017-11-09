@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "term.h"
+#include "atom.h"
 #include <vector>
 using std::vector;
 
@@ -16,8 +16,7 @@ public:
   List * tail() const;
   bool ComparisonList(List *list);
   int getSize() const;
-  vector<Term *> _elements;
-private:
+  vector<Term *> _elements; //有時間將他變保護
 };
 
 #endif

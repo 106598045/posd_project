@@ -10,6 +10,7 @@ using namespace std;
 #include "list.h"
 #include "scanner.h"
 #include "struct.h"
+#include "number.h"
 
 class Parser{
 public:

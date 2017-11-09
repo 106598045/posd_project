@@ -3,46 +3,16 @@
 
 #include "atom.h"
 #include <vector>
-#include <string>
 
-using std::string;
-
-class Struct: public Term {
+class Struct:public Term{
 public:
-  Struct(Atom name, std::vector<Term *> args): _name(name) {
-    _args = args;
-  }
-
-  Term * args(int index) {
-    return _args[index];
-  }
-
-  Atom & name() {
-    return _name;
-  }
-  string symbol() const {
-    string ret = _name.symbol() + "(";
-    if(_args.size()){
-      std::vector<Term *>::const_iterator it = _args.begin();
-      for (; it != _args.end()-1; ++it)
-        ret += (*it)->symbol()+", ";
-      ret  += (*it)->symbol();
-    }
-    ret += ")";
-    return ret;
-  }
-  string value() const {
-    string ret = _name.symbol() + "(";
-    std::vector<Term *>::const_iterator it = _args.begin();
-    for (; it != _args.end()-1; ++it)
-      ret += (*it)->value()+", ";
-    ret  += (*it)->value()+")";
-    return ret;
-  }
-
-  int arity(){
-    return _args.size();
-  }
+  Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {}
+  Term * args(int index);
+  int arity();
+  Atom const & name();
+  string symbol() const;
+  string value() const;
+  //bool match(Term &term); TA的struct沒有override match
 
 private:
   Atom _name;

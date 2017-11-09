@@ -1,22 +1,41 @@
-all: hw5
+INC_DIR = include
+SRC_DIR = src
+BIN_DIR = bin
 
-hw5: mainParser.o atom.o list.o
+all: hw4
+
+hw4: main.o term.o variable.o struct.o list.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw5 mainParser.o atom.o list.o -lgtest
+	g++ -o hw4 main.o term.o variable.o struct.o list.o -lgtest
 else
-	g++ -o hw5 mainParser.o atom.o list.o -lgtest -lpthread
+	g++ -o hw4 main.o term.o variable.o struct.o list.o -lgtest -lpthread
 endif
+#-------------------------------------------------
 
-mainParser.o: mainParser.cpp utParser.h
-	g++ -std=gnu++11 -c mainParser.cpp
+main.o: main.cpp utStruct.h atom.h struct.h
+	 	g++  -std=gnu++0x -c  main.cpp
 
-atom.o: atom.cpp atom.h
-	g++ -std=gnu++11 -c atom.cpp
-
-list.o: list.cpp list.h variable.h
-	g++ -std=gnu++11 -c list.cpp
+variable.o: variable.cpp number.h atom.h variable.h
+		g++ -std=gnu++0x -c variable.cpp
+#-------------------------------------------------
+term.o: term.h variable.h term.cpp
+		g++ -std=gnu++0x -c term.cpp
+#-------------------------------------------------
+#number.o:${INC_DIR}/variable.h ${INC_DIR}/number.h ${SRC_DIR}/number.cpp ${INC_DIR}/atom.h
+#		g++ -std=gnu++0x -c ${SRC_DIR}/number.cpp
+#-------------------------------------------------
+#atom.o: ${INC_DIR}/atom.h ${INC_DIR}/number.h ${INC_DIR}/variable.h ${SRC_DIR}/atom.cpp
+#		g++ -std=gnu++0x -c ${SRC_DIR}/atom.cpp
+#-------------------------------------------------
+struct.o: struct.h atom.h struct.cpp
+		g++ -std=gnu++0x -c struct.cpp
+#-------------------------------------------------
+list.o: list.h list.cpp
+		g++ -std=gnu++0x -c list.cpp
 
 clean:
-	rm -f *.o hw5
-stat:
-	wc *.h *.cpp
+ifeq (${OS}, Windows_NT)
+		del *.o *.exe
+else
+		rm -f *.o hw4
+endif

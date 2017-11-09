@@ -16,7 +16,7 @@ class Parser{
 public:
   Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
-    if(_scanner.isEmpty()) return new Atom("");
+    if(_scanner.isEmpty()) return nullptr;
     int token = _scanner.nextToken();
     _currentToken=token;
     if(token == VAR){

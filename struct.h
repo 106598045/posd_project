@@ -12,8 +12,10 @@ public:
   Atom const & name();
   string symbol() const;
   string value() const;
+  Iterator * createIterator();
   //bool match(Term &term); TA的struct沒有override match
-
+  Iterator * createDFSIterator();
+  //Iterator * createDFSIterator();
 private:
   Atom _name;
   std::vector<Term *> _args;

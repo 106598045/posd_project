@@ -1,22 +1,31 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "term.h"
+#include "atom.h"
 #include <vector>
+#include <string>
+#include <typeinfo>
+#include <iostream>
 using std::vector;
+
+class Variable ;
 
 class List : public Term {
 public:
-  List (): _elements() {}
+  string symbol() const ;
+  string value() const ;
+  bool match(Term & term) ;
+public:
+  List (): _elements(0) {}
   List (vector<Term *> const & elements):_elements(elements){}
-  string symbol() const;
-  string value() const;
-  bool match(Term & term);
-  Term * head() const; //使用pointer的用意?
+  Term * head() const;
   List * tail() const;
-  bool ComparisonList(List *list);
-  int getSize() const;
-  vector<Term *> _elements; //有時間將他變保護
+  Term * args(int index) {
+    return _elements[index];
+  }
+  int arity() const {return _elements.size();}
+private:
+  vector<Term *> _elements;
 };
 
 #endif

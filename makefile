@@ -2,13 +2,13 @@ INC_DIR = include
 SRC_DIR = src
 BIN_DIR = bin
 
-all: hw6
+all: hw7
 
-hw6: main.o term.o variable.o struct.o list.o
+hw7: main.o term.o variable.o struct.o list.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw6 main.o term.o variable.o struct.o list.o -lgtest
+	g++ -o hw7 main.o term.o variable.o struct.o list.o -lgtest
 else
-	g++ -o hw6 main.o term.o variable.o struct.o list.o -lgtest -lpthread
+	g++ -o hw7 main.o term.o variable.o struct.o list.o -lgtest -lpthread
 endif
 #-------------------------------------------------
 
@@ -27,7 +27,7 @@ term.o: term.h variable.h term.cpp
 #atom.o: ${INC_DIR}/atom.h ${INC_DIR}/number.h ${INC_DIR}/variable.h ${SRC_DIR}/atom.cpp
 #		g++ -std=gnu++0x -c ${SRC_DIR}/atom.cpp
 #-------------------------------------------------
-struct.o: struct.h atom.h struct.cpp
+struct.o: struct.h atom.h iterator.h struct.cpp
 		g++ -std=gnu++0x -c struct.cpp
 #-------------------------------------------------
 list.o: list.h list.cpp
@@ -37,5 +37,5 @@ clean:
 ifeq (${OS}, Windows_NT)
 		del *.o *.exe
 else
-		rm -f *.o hw6
+		rm -f *.o hw7
 endif

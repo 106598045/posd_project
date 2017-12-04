@@ -79,14 +79,17 @@ public:
     {
       if(isCOMMA==1){
         Term * findTerm = find(term);
-        if(findTerm != nullptr) term->match(*findTerm);
+        if(findTerm != nullptr){
+           term = findTerm;
+         }
       }
       _terms.push_back(term);
       while((_currentToken = _scanner.nextToken()) == ',' ||  _currentToken=='='|| _currentToken == ';') {
         if (_currentToken == '=') {
-          isCOMMA = 0;
+          //isCOMMA = 0;
           Node * left = new Node(TERM, _terms.back(), nullptr, nullptr);
-          _terms.push_back(createTerm());
+          Term* rterm = createTerm();
+          _terms.push_back(rterm);
           Node * right = new Node(TERM, _terms.back(), nullptr, nullptr);
           Node * root = new Node(EQUALITY, nullptr, left, right);
           _expressionTree = root;
@@ -111,14 +114,15 @@ public:
   }
 
   Term * find(Term * term){
+    Term * t = nullptr;
     for(int index = 0; index < _terms.size() ; index++){
-      if(_terms[index]->symbol() == term->symbol()) return _terms[index];
+      if(_terms[index]->symbol() == term->symbol()) t = _terms[index];
       Struct * s = dynamic_cast<Struct*>(_terms[index]);
       if(s) {
         return findStruct(s,term);
       }
     }
-    return nullptr;
+    return t;
   }
 
   Term * findStruct(Struct * s, Term * term){
@@ -131,6 +135,20 @@ public:
     }
   }
 
+  Term * isStruct(Term * term){
+    Struct * s = dynamic_cast<Struct*>(term);
+    if(s){
+      cout << s->symbol() <<endl;
+      for(int i = 0; i < s->arity() ; i++){
+        Struct * ss = dynamic_cast<Struct*>(s->args(i));
+        if(ss) {
+          isStruct(ss);
+        }else{
+          return find(s->args(i));
+        }
+      }
+    }
+  }
 
   Node * expressionTree(){
     return _expressionTree;

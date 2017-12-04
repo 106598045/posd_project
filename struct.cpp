@@ -1,5 +1,5 @@
 #include "struct.h"
-
+#include "iterator.h"
 //homework 4沒用到
 Term * Struct::args(int index) {
   return _args[index];
@@ -32,4 +32,12 @@ string Struct::value() const{
   }
   ret += _args[_args.size()-1]-> value() + ")";
   return  ret;
+}
+
+Iterator * Struct::createIterator(){
+  return new StructIterator(this);
+}
+
+Iterator * Struct::createDFSIterator(){
+  return new DFSIterator(this);
 }

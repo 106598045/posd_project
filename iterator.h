@@ -164,7 +164,6 @@ class BFSIterator :public Iterator<T>{
         }else if(l != nullptr){
           _queue.push(l);
           _items.push_back(l);
-          pushListNameOnVector();
         }else{
           _items.push_back(term);
         }

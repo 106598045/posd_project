@@ -177,12 +177,12 @@ TEST(iterator, ListBFSIterator) {
   ASSERT_EQ("Y", itList->currentItem()->symbol());
   ASSERT_FALSE(itList->isDone());
   itList->next();
-  ASSERT_EQ("X", itList->currentItem()->symbol());
+  ASSERT_EQ("1", itList->currentItem()->symbol());
   ASSERT_FALSE(itList->isDone());
   itList->next();
-  ASSERT_EQ("2", itList->currentItem()->symbol());
-  itList->next();
-  ASSERT_TRUE(itList->isDone());
+  ASSERT_EQ("t(X, 2)", itList->currentItem()->symbol());
+  ASSERT_FALSE(itList->isDone());
+
 }
 
 TEST(iterator, ListBFSIterator2) {
@@ -220,7 +220,7 @@ TEST(iterator, ListBFSIterator2) {
   itStruct->next();
   ASSERT_EQ("beefPatty", itStruct->currentItem()->symbol());
   itStruct->next();
-  ASSERT_TRUE(itStruct->isDone());
+  ASSERT_FALSE(itStruct->isDone());
 }
 
 

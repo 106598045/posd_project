@@ -27,7 +27,7 @@ term.o: term.h variable.h term.cpp
 #atom.o: ${INC_DIR}/atom.h ${INC_DIR}/number.h ${INC_DIR}/variable.h ${SRC_DIR}/atom.cpp
 #		g++ -std=gnu++0x -c ${SRC_DIR}/atom.cpp
 #-------------------------------------------------
-struct.o: struct.h atom.h iterator.h struct.cpp
+struct.o: struct.h atom.h struct.cpp
 		g++ -std=gnu++0x -c struct.cpp
 #-------------------------------------------------
 list.o: list.h list.cpp

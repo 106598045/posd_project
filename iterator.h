@@ -3,37 +3,43 @@
 
 #include "struct.h"
 #include "list.h"
+#include <queue>
 
-class Iterator {
-public:
+class Struct;
+template <typename T>
+class Iterator{
+  public:
   virtual void first() = 0;
   virtual void next() = 0;
-  virtual Term* currentItem() const = 0;
+  virtual T currentItem() const = 0;
   virtual bool isDone() const = 0;
 };
 
-class NullIterator :public Iterator{
+
+template <class T>
+class NullIterator :public Iterator<T>{
 public:
   NullIterator(Term *n){}
   void first(){}
   void next(){}
-  Term * currentItem() const{
+  T currentItem() const{
       return nullptr;
   }
   bool isDone() const{
     return true;
-  }
+  };
 
 };
 
-class StructIterator :public Iterator {
+template <class T>
+class StructIterator :public Iterator<T> {
 public:
   friend class Struct;
   void first() {
     _index = 0;
   }
 
-  Term* currentItem() const {
+  T currentItem() const {
     return _s->args(_index);
   }
 
@@ -44,14 +50,15 @@ public:
   void next() {
     _index++;
   }
-
+  StructIterator(Struct* s): _index(0), _s(s) {}
 private:
-  StructIterator(Struct *s): _index(0), _s(s) {}
   int _index;
-  Struct* _s;
+  T _s;
 };
 
-class ListIterator :public Iterator {
+class List;
+template <class T>
+class ListIterator :public Iterator<T>{
 public:
   ListIterator(List *list): _index(0), _list(list) {}
 
@@ -72,63 +79,122 @@ public:
   }
 private:
   int _index;
-  List* _list;
+  List * _list;
 };
 
-class DFSIterator :public Iterator {
+template <class T>
+class DFSIterator :public Iterator<T>{
   public:
-    friend class Struct;
-    void first() {
-      _index = 0;
-    }
+    DFSIterator(Term *t): _index(0), _t(t) {traverse(t);}
+    void first() {_index = 0;}
 
-    Term* currentItem() const {
+    T currentItem() const {
       return _items[_index];
     }
 
     bool isDone() const {
-      return _index >= _s->arity();
+      return _index >= _items.size();
     }
 
     void next() {
       _index++;
     }
 
-    void traverse(){
-      while(!isDone()){
-        Term * term =  _s->args(_index);
+    void traverse(Term * t){
+      for(int i=0;i<t->arity();i++){
+        Term * term =  t->args(i);
         Struct * s = dynamic_cast<Struct *>(term);
+        List * l = dynamic_cast<List *>(term);
         if(s != nullptr){
-          structTraverse(s);
+            pushStructName(s);
+            traverse(s);
+        }else if(l != nullptr){
+            traverse(l);
         }else{
           _items.push_back(term);
         }
-        next();
-      }
-      //printAllItem();
-    }
-
-    void structTraverse(Struct * s){
-      for(int i=0;i<s->arity();i++){
-        Struct * s2 = dynamic_cast<Struct *>(s->args(i));
-        if(s2){
-          structTraverse(s2);
-        }else{
-          _items.push_back(s->args(i));
-        }
       }
     }
 
-    void printAllItem(){
+    void pushStructName(Struct * s){
+      Term * structName = new Atom(s->name().symbol());
+      _items.push_back(structName);
+    }
+
+    void test_printAllItem(){
       for(int i=0;i<_items.size();i++){
         cout << _items[i]->symbol()<<endl;
       }
     }
 
   private:
-    DFSIterator(Struct *s): _index(0), _s(s) {traverse();}
     int _index;
-    Struct* _s;
+    Term * _t;
     vector<Term*> _items;
-  };
+};
+
+
+template <class T>
+class BFSIterator :public Iterator<T>{
+  public:
+    BFSIterator(Term *t): _index(0), _t(t) {traverse(t);}
+    void first() {_index = 0;}
+
+    T currentItem() const {
+      return _items[_index];
+    }
+
+    bool isDone() const {
+      return _index >= _items.size();
+    }
+
+    void next() {
+      _index++;
+    }
+
+    void traverse(Term * t){
+      for(int i=0;i<t->arity();i++){
+        Term * term =  t->args(i);
+        Struct * s = dynamic_cast<Struct *>(term);
+        List * l = dynamic_cast<List *>(term);
+        if(s != nullptr){
+          _queue.push(s);
+          pushStructNameOnVector(s);
+        }else if(l != nullptr){
+          _queue.push(l);
+          pushListNameOnVector();
+        }else{
+          _items.push_back(term);
+        }
+      }
+      while(!_queue.empty()){
+        Term * term = _queue.front();
+        _queue.pop();
+        traverse(term);
+      }
+    }
+
+    void pushStructNameOnVector(Struct * s){
+      Term * structName = new Atom(s->name().symbol());
+      _items.push_back(structName);
+    }
+
+    void pushListNameOnVector(){
+      Term * ListName = new Atom("[]");
+      _items.push_back(ListName);
+    }
+
+    void test_printAllItem(){
+      for(int i=0;i<_items.size();i++){
+        cout << _items[i]->symbol()<<endl;
+      }
+    }
+
+  private:
+    int _index;
+    Term * _t;
+    vector<Term*> _items;
+    queue<Term*> _queue;
+};
+
 #endif

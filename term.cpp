@@ -2,9 +2,10 @@
 #include "variable.h"
 #include "iterator.h"
 
-Iterator * Term::createIterator(){
-  return new NullIterator(this);
+Iterator<Term *> * Term::createIterator(){
+  return new NullIterator<Term *>(this);
 }
+
 
 bool Term::match(Term & a){
   //對於var做額外處理

@@ -4,6 +4,7 @@
 #include "atom.h"
 #include <vector>
 
+template<typename T> class Iterator;
 class Struct:public Term{
 public:
   Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {}
@@ -12,10 +13,9 @@ public:
   Atom const & name();
   string symbol() const;
   string value() const;
-  Iterator * createIterator();
-  //bool match(Term &term); TA的struct沒有override match
-  Iterator * createDFSIterator();
-  //Iterator * createDFSIterator();
+  Iterator<Term *> * createIterator();
+  Iterator<Term *> * createDFSIterator();
+  Iterator<Term *> * createBFSIterator();
 private:
   Atom _name;
   std::vector<Term *> _args;

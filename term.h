@@ -5,8 +5,7 @@
 #include <typeinfo>
 
 using namespace std;
-
-class Iterator;
+template<class T>class Iterator;
 class Term{
 public:
   virtual string symbol() const {return _symbol;}
@@ -14,7 +13,7 @@ public:
   virtual bool match(Term & a);
   virtual int arity(){return 0;}
   virtual Term * args(int index) {throw string("無法使用");}
-  virtual Iterator * createIterator();
+  virtual Iterator<Term*> * createIterator();
 protected:
   Term ():_symbol(""){} //預設建構子
   Term (string s):_symbol(s) {} //帶string參建構子，初始化 _symbol

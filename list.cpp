@@ -4,14 +4,14 @@
 #include <iostream>
 #include <string>
 #include "list.h"
+#include "iterator.h"
 using std::vector;
 
 string List::symbol() const{
     string ret ;
     if(_elements.size()==0 ){
       ret = "[]";
-    }
-    else{
+    }else{
       ret  = "[";
       std::vector<Term *>::const_iterator it = _elements.begin();
       for( ; it != _elements.end()-1 ; ++it ){
@@ -20,22 +20,24 @@ string List::symbol() const{
       ret += (*it)->symbol()+"]";
     }
     return ret;
-  }
+}
+
 string List::value() const{
     string ret ;
     if(_elements.empty()){
         ret = "[]";
-    }
-    else{
+    }else{
         ret  = "[";
         std::vector<Term *>::const_iterator it = _elements.begin();
         for( ; it != _elements.end()-1 ; ++it ){
-        ret += (*it)->value()+", ";
+          ret += (*it)->value()+", ";
         }
         ret += (*it)->value()+"]";
+    }
+    return ret;
 }
-return ret;
-}
+
+//重構
 bool List::match(Term & term) {
     if(typeid(term) ==  typeid(List)){
         bool ret =true;
@@ -71,12 +73,13 @@ bool List::match(Term & term) {
         return value () == term.value();
     }
 }
+
 Term * List::head() const{
     if(_elements.empty())
         throw std::string("Accessing head in an empty list");
-
     return _elements[0];
 }
+
 List * List::tail() const {
     if(_elements.empty())
         throw std::string("Accessing tail in an empty list");
@@ -84,4 +87,16 @@ List * List::tail() const {
     _clone_elements.assign(_elements.begin()+1, _elements.end());
     List *ls= new List(_clone_elements) ;
     return ls;
+}
+
+Iterator<Term *> * List::createIterator(){
+  return new ListIterator<Term *>(this);
+}
+
+Iterator<Term *> * List::createDFSIterator(){
+  return new DFSIterator<Term *>(this);
+}
+
+Iterator<Term *> * List::createBFSIterator(){
+  return new BFSIterator<Term *>(this);
 }

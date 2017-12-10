@@ -106,9 +106,10 @@ class DFSIterator :public Iterator<T>{
         Struct * s = dynamic_cast<Struct *>(term);
         List * l = dynamic_cast<List *>(term);
         if(s != nullptr){
-            pushStructName(s);
+            _items.push_back(s);
             traverse(s);
         }else if(l != nullptr){
+            _items.push_back(l);
             traverse(l);
         }else{
           _items.push_back(term);
@@ -159,9 +160,10 @@ class BFSIterator :public Iterator<T>{
         List * l = dynamic_cast<List *>(term);
         if(s != nullptr){
           _queue.push(s);
-          pushStructNameOnVector(s);
+          _items.push_back(s);
         }else if(l != nullptr){
           _queue.push(l);
+          _items.push_back(l);
           pushListNameOnVector();
         }else{
           _items.push_back(term);

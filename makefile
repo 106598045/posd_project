@@ -1,41 +1,37 @@
-INC_DIR = include
-SRC_DIR = src
-BIN_DIR = bin
+all: hw8 shell
 
-all: hw7
-
-hw7: main.o term.o variable.o struct.o list.o
+hw8: main.o list.o atom.o struct.o  scanner.h  parser.h exp.h
 ifeq (${OS}, Windows_NT)
-	g++ -o hw7 main.o term.o variable.o struct.o list.o -lgtest
+	g++ -o hw8 main.o list.o atom.o struct.o -lgtest
 else
-	g++ -o hw7 main.o term.o variable.o struct.o list.o -lgtest -lpthread
+	g++ -o hw8 main.o list.o atom.o struct.o -lgtest -lpthread
 endif
-#-------------------------------------------------
 
-main.o: main.cpp atom.h struct.h
-	 	g++  -std=gnu++0x -c  main.cpp
+shell: shell.o list.o struct.o atom.o
+ifeq (${OS}, Windows_NT)
+	g++ -o shell shell.o atom.o list.o struct.o -lgtest
+else
+	g++ -o shell shell.o atom.o list.o struct.o -lgtest -lpthread
+endif
 
-variable.o: variable.cpp number.h atom.h variable.h
-		g++ -std=gnu++0x -c variable.cpp
-#-------------------------------------------------
-term.o: term.h variable.h term.cpp
-		g++ -std=gnu++0x -c term.cpp
-#-------------------------------------------------
-#number.o:${INC_DIR}/variable.h ${INC_DIR}/number.h ${SRC_DIR}/number.cpp ${INC_DIR}/atom.h
-#		g++ -std=gnu++0x -c ${SRC_DIR}/number.cpp
-#-------------------------------------------------
-#atom.o: ${INC_DIR}/atom.h ${INC_DIR}/number.h ${INC_DIR}/variable.h ${SRC_DIR}/atom.cpp
-#		g++ -std=gnu++0x -c ${SRC_DIR}/atom.cpp
-#-------------------------------------------------
-struct.o: struct.h atom.h struct.cpp
-		g++ -std=gnu++0x -c struct.cpp
-#-------------------------------------------------
-list.o: list.h list.cpp
+shell.o: shell.cpp parser.h scanner.h
+	g++ -std=gnu++0x -c shell.cpp
+
+main.o: main.cpp exception.h scanner.h expression.h parser.h
+	g++ -std=gnu++0x -c main.cpp
+
+atom.o: atom.cpp atom.h variable.h
+	g++ -std=gnu++0x -c atom.cpp
+
+struct.o:struct.cpp struct.h atom.o
+		 g++ -std=gnu++0x -c struct.cpp
+
+list.o: list.cpp list.h atom.o
 		g++ -std=gnu++0x -c list.cpp
 
 clean:
-ifeq (${OS}, Windows_NT)
-		del *.o *.exe
-else
-		rm -f *.o hw7
-endif
+	rm -f *.o hw8 shell
+stat:
+	wc *.h *.cpp
+hw:
+	make clean make hw8./hw8

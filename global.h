@@ -16,7 +16,6 @@ const int NUMBER = 256;
 const int ATOM = 257;
 const int ATOMSC = 258;
 const int VAR = 259;
-const int LIST = 260;
 
 #include <vector>
 using std::vector;
@@ -25,7 +24,7 @@ vector<pair<string, int>> symtable;
 
 bool isSpecialCh(char c) {
   return c == '+'
-         //|| c == '=' // ... the matching operator
+      // || c == '=' // ... the matching operator
          || c == '-'
          || c == '*'
          || c == '/'

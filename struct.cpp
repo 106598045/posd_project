@@ -1,47 +1,33 @@
 #include "struct.h"
 #include "iterator.h"
-//homework 4沒用到
-Term * Struct::args(int index) {
-  return _args[index];
+Iterator * Struct::createIterator()
+{
+  return new StructIterator(this);
 }
 
-int Struct::arity(){
-    return _args.size();
-  }
+// bool Struct::match( Term &term ){
+//   Struct *s = dynamic_cast<Struct*>(&term);
+//   if( s ){
+//     if( _name.symbol() != s->_name.symbol() ) return false;
+//     if(arity() != s->arity())return false;
+//     Iterator *s1 = createIterator();
+//     Iterator *s2 = term.createIterator();
+//     for( s1->first(), s2->first(); !s1->isDone() ; s1->next(), s2->next() ){
+//       if( !s1->currentItem()->match( *s2->currentItem() ))
+//         return false;
+//     }
+//     return true;
+//   }
+//   return Term::match(term);
+// }
 
-Atom const & Struct::name(){
-  return _name;
-}
-
-string  Struct::symbol() const {
-  string ret = _name.symbol() + "(";
-  if(_args.size()){
-    std::vector<Term *>::const_iterator it = _args.begin();
-    for (; it != _args.end()-1; ++it)
-      ret += (*it)->symbol()+", ";
-    ret  += (*it)->symbol();
-  }
-  ret += ")";
-  return ret;
-}
-
-string Struct::value() const{
-  string ret =_name.value() + "(";
-  for(int i = 0; i < _args.size() - 1 ; i++){
-    ret += _args[i]-> value() + ", ";
-  }
-  ret += _args[_args.size()-1]-> value() + ")";
-  return  ret;
-}
-
-Iterator<Term *> * Struct::createIterator(){
-  return new StructIterator<Term *>(this);
-}
-
-Iterator<Term *> * Struct::createDFSIterator(){
-  return new DFSIterator<Term *>(this);
-}
-
-Iterator<Term *> * Struct::createBFSIterator(){
-  return new BFSIterator<Term *>(this);
-}
+// string Struct::symbol() const {
+//   if(_args.empty())
+//   return  _name.symbol() + "()";
+//   string ret = _name.symbol() + "(";
+//   std::vector<Term *>::const_iterator it = _args.begin();
+//   for (; it != _args.end()-1; ++it)
+//     ret += (*it)->symbol()+", ";
+//   ret  += (*it)->symbol()+")";
+//   return ret;
+// }

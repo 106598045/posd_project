@@ -1,8 +1,6 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-
 #include "global.h"
-
 
 #include <string>
 #include <vector>
@@ -24,7 +22,7 @@ public:
         string s = extractAtom();
         processToken<ATOM>(s);
         return ATOM;
-      } else if (isSpecialCh(currentChar())) {
+      } else if (isSpecialCh(currentChar()) && position() < buffer.length() - 1) {
         string s = extractAtomSC();
         processToken<ATOMSC>(s);
         return ATOMSC;
@@ -34,6 +32,37 @@ public:
         return VAR;
       } else {
         _tokenValue = NONE;
+        return extractChar();
+      }
+  }
+
+  int peekToken() {
+      int currentPos = pos;
+      if (skipLeadingWhiteSpace() >= buffer.length()){
+        pos = currentPos;
+        return EOS;
+      } else if (isdigit(currentChar())) {
+        _tokenValue = extractNumber();
+        pos = currentPos;
+        return NUMBER;
+      } else if (islower(currentChar())) {
+        string s = extractAtom();
+        processToken<ATOM>(s);
+        pos = currentPos;
+        return ATOM;
+      } else if (isSpecialCh(currentChar()) && position() < buffer.length() - 1) {
+        string s = extractAtomSC();
+        processToken<ATOMSC>(s);
+        pos = currentPos;
+        return ATOMSC;
+      } else if (isupper(currentChar()) || currentChar() == '_') {
+        string s = extractVar();
+        processToken<VAR>(s);
+        pos = currentPos;
+        return VAR;
+      } else {
+        _tokenValue = NONE;
+        pos = currentPos;
         return extractChar();
       }
   }
@@ -80,11 +109,7 @@ public:
     return buffer[pos++];
   }
 
-  bool isEmpty(){
-    bool b = !((bool)buffer.size());
-    return b;
-  }
-
+  bool findToken(string s) const{ return buffer.find(s); }
 private:
   string buffer;
   int pos;
@@ -103,6 +128,5 @@ private:
     }
   }
 };
-
 
 #endif

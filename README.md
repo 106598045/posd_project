@@ -80,3 +80,55 @@ Let _S_ and _T_ be two terms.
   * all their corresponding components match.
 
   The result of the instantiation is determined by the matching of the components.
+
+### List
+
+```Prolog
+?- X = [1, 2, 3].
+X = [1, 2, 3].
+
+?- X = .(1,[]).
+X = [1]
+
+?- [1, 2] = .(1, .(2, [])).
+true.
+
+?- [1,2,3] = [H|L].
+H = 1,
+L = [2, 3]
+
+?- [1,2,3] = .(H, L).
+H = 1,
+L = [2, 3]
+```
+
+### Lexical analysis and parsing
+
+lexical analyzer, or token scanner
+(Dragon book, p71, Fig 2.37)
+
+| lexeme                   | token        | attribute value          |
+| :----------------------- | :----------  | :----------------------- |
+| sequence of digits       | Number       | numeric value of sequence|
+| small letter followed by alphanumeric|    Atom            |      index into symbol                    |
+| cap letter or '_' followed   by alphanumeric  | Var          | index into symbol        |
+
+Grammar:
+
+```prolog
+matchings -> disj_matching rest_disj_matching '.'
+rest_disj_matching -> ';' disj_matching rest_disj_matching | e
+
+disj_matching -> conj_matching rest_conj_matching
+rest_conj_matching -> ',' conj_matching rest_conj_matching | e
+conj_matching -> term '=' term
+
+term -> atom | number | var | struct | list
+struct -> atom '(' terms ')'
+list -> '[' terms ']'
+terms -> term rest| e
+rest -> ',' term rest | e
+atom -> Atom
+number -> Number
+var -> Var
+```

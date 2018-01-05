@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     Parser *parser;
     stringstream stream;
     while (true) {
-        while ( input == "" || input.back() != '.')
+        while (input.back() != '.' || input == "")
         {
             if (input == "" ){
               cout << "?- ";
